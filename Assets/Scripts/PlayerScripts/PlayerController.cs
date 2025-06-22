@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading;
 using UnityEngine;
@@ -6,112 +7,121 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
-    // properties acceptable for all classes of State Pattern
-    public Rigidbody rb { get; private set; }
-    public Vector2 movementInput { get; private set; } // current input of moving
-    public float speed { get { return _speed; } }
-    public float jumpStrenght { get { return _jumpStrenght; } }
-    public bool isGrounded { get; private set; } //flag to check if player is on the ground
-
-    private bool isJumpAviable { get; set; } // check if Jump Timer is expired (sec gap between jumps)
-
+    // External
+    private Rigidbody rb;
     private Collider playerCollider;
 
-    // customizable parameters
-    [SerializeField] float _speed = 3f;
-    [SerializeField] float _jumpStrenght = 10f;
-    [SerializeField] float jumpTimer = 0.5f; // time for recovery of jump counts
-    [SerializeField] int jumpCount = 1; // max jumps before recovering jumpTimer
-    [SerializeField] LayerMask groundLayer; // Layer for all ground 
-    [SerializeField] float raycastForGroundCheck = 0.55f; //how deep to bottom needs to check if there is a ground 
-    [SerializeField] float raycastForWallCheck = 0.55f; //how deep to left needs to check if there is a wall 
+    // Own
+    private Vector2 movementInput;
+    private Vector2 groundDirection;
 
-    //State Pattern
-    private IPlayerStates currentState;
+    // Settings
+
+    [SerializeField] float speed = 5f;
+    [SerializeField] float jumpGAP = 0.5f;
+    [SerializeField] float jumpStrenght = 10f;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] float raycastGroundCheck = 0.55f;
+
+    private bool isJumpAviable = true;
+    //private float boostSpeed = 1f;
+    private float maxSpeedBoosting = 2f;
+    private bool isSpeedBoostingActive = false;
 
     private void Awake()
     {
-        isJumpAviable = true;
         rb = GetComponent<Rigidbody>();
-        playerCollider = GetComponent<Collider>(); 
+        playerCollider = GetComponent<Collider>();
     }
-
-    private void Start()
-    {
-        SetState(new IdleState()); //set up entry state for player - IDLE
-    }
-
-    public void SetState(IPlayerStates newState)
-    {
-        currentState?.OnExit(this); // if there is some state, cancels it
-        currentState = newState; // set up new state
-        currentState.OnEnter(this); // call Enter in this state
-    }
-
-    // --- Input System Callbacks ---
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        movementInput = context.ReadValue<Vector2>(); //save current input of moving
-        currentState.HandleMovement(this, context);
+        movementInput = context.ReadValue<Vector2>();
+        if (movementInput.x != 0 && !isSpeedBoostingActive)
+        {
+            isSpeedBoostingActive = true;
+            //StartCoroutine(SpeedBoostIncreasing());
+        }
     }
+
+    //IEnumerator SpeedBoostIncreasing()
+    //{
+    //    StopCoroutine(SpeedBoostDecreasing());
+    //    while (movementInput.x != 0 && boostSpeed < maxSpeedBoosting)
+    //    {
+    //        boostSpeed += Time.deltaTime;
+    //        yield return null;
+    //    }
+    //    isSpeedBoostingActive = false;
+    //}
+
+    //IEnumerator SpeedBoostDecreasing()
+    //{
+    //    while (movementInput.x == 0 && boostSpeed > 1f)
+    //    {
+    //        boostSpeed -= Time.deltaTime;
+    //        yield return null;
+    //    }
+    //}
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && jumpCount > 0)
+        if (context.performed && isJumpAviable)
         {
-            StartCoroutine(JumpCounter());
-            currentState.HandleJump(this, context);
+            isJumpAviable = false;
+            StartCoroutine(GapForJump());
+            rb.AddForce(-groundDirection * jumpStrenght, ForceMode.Impulse);
+            if (groundDirection.x != 0 && groundDirection.y == 0)
+            {
+                rb.AddForce(Vector3.up * jumpStrenght, ForceMode.Impulse);
+            }
         }
     }
 
-    // --- Unity LifeCycle Methods ---
+    IEnumerator GapForJump()
+    {
+        yield return new WaitForSeconds(jumpGAP);
+        isJumpAviable = true;
+    }
 
     void FixedUpdate()
     {
-        CheckIfGrounded();
-        if (!isGrounded)
+        DetermineIsGround();
+        if (movementInput.x != 0)
         {
-            CheckIfOnTheWall();
+            rb.AddForce(Vector2.right * movementInput * speed /* *  boostSpeed*/, ForceMode.Force);
         }
-        currentState.PhysicsUpdate(this);
-
+        else if (movementInput.y != 0)
+        {
+            rb.AddForce(Vector2.left * movementInput * speed /* * boostSpeed*/, ForceMode.Force);
+        }
+        else
+        {
+            //StartCoroutine(SpeedBoostDecreasing());
+        }
     }
 
-    // --- Ground Detection ---
-
-    private void CheckIfGrounded()
+    private void DetermineIsGround()
     {
-        // Implement start point of raycasting
         Vector3 startPoint = playerCollider.bounds.center;
+        groundDirection = Vector3.zero;
 
-        // Throwing of RayCast
-        RaycastHit hit;
-        isGrounded = Physics.Raycast(startPoint, Vector3.down, out hit, raycastForGroundCheck, groundLayer); // start point, direction, information about hits, check distance, layers to check
-    }
-
-    private void CheckIfOnTheWall()
-    {
-        // Implement start point of raycasting
-        Vector3 startPoint = playerCollider.bounds.center;
-
-        // Throwing of RayCast
-        RaycastHit hit;
-        if (Physics.Raycast(startPoint, Vector3.right, out hit, raycastForWallCheck, groundLayer))
+        if (Physics.Raycast(startPoint, Vector3.right, out var rightHit, raycastGroundCheck, groundLayer))
         {
-            //isGrounded = true;
-            SetState(new WallTouch("right"));
+            Debug.DrawRay(startPoint, Vector3.right * raycastGroundCheck, Color.cyan, Time.deltaTime);
+            groundDirection.x++;
         }
-        else if (Physics.Raycast(startPoint, Vector3.left, out hit, raycastForWallCheck, groundLayer))
-        {
-            SetState(new WallTouch("left"));
-        }
-    }
 
-    IEnumerator JumpCounter()
-    {
-        jumpCount--;
-        yield return new WaitForSeconds(jumpTimer);
-        jumpCount++;
+        if (Physics.Raycast(startPoint, Vector3.left, out var leftHit, raycastGroundCheck, groundLayer))
+        {
+            Debug.DrawRay(startPoint, Vector3.left * raycastGroundCheck, Color.cyan, Time.deltaTime);
+            groundDirection.x--;
+        }
+
+        if (Physics.Raycast(startPoint, Vector3.down, out var groundHit, raycastGroundCheck, groundLayer))
+        {
+            Debug.DrawRay(startPoint, Vector3.down * raycastGroundCheck, Color.cyan, Time.deltaTime);
+            groundDirection.y--;
+        }
     }
 }

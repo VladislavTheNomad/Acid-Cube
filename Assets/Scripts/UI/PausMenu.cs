@@ -23,7 +23,6 @@ public class PausMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0.05f;
-        Debug.Log("+");
     }
 
     // BUTTON "RETRY"
