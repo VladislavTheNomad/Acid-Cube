@@ -1,0 +1,12 @@
+newmtl Krystall
+Kd 1 0.9198113 0.9693177
+d 1
+
+newmtl Krystall_2
+Kd 0.6893556 0.4292453 1
+d 1
+
+newmtl Krystall_3
+Kd 0.6509434 0.0706212 0.4545078
+d 1
+

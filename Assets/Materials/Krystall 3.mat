@@ -29,7 +29,7 @@ Material:
   - _RECEIVE_SHADOWS_OFF
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -124,7 +124,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.6
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 5
@@ -135,7 +135,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.6509434, g: 0.07062123, b: 0.45450792, a: 1}
     - _Color: {r: 0.6509434, g: 0.0706212, b: 0.45450783, a: 1}
-    - _EmissionColor: {r: 0, g: 1.2667584, b: 6.4112425, a: 1}
+    - _EmissionColor: {r: 0.99588764, g: 0, b: 1.8964823, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
