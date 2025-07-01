@@ -5,123 +5,132 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
-public class PlayerController : MonoBehaviour
+namespace AcidCube
 {
-    // External
-    private Rigidbody rb;
-    private Collider playerCollider;
-
-    // Own
-    private Vector2 movementInput;
-    private Vector2 groundDirection;
-
-    // Settings
-
-    [SerializeField] float speed = 5f;
-    [SerializeField] float jumpGAP = 0.5f;
-    [SerializeField] float jumpStrenght = 10f;
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] float raycastGroundCheck = 0.55f;
-
-    private bool isJumpAviable = true;
-    //private float boostSpeed = 1f;
-    private float maxSpeedBoosting = 2f;
-    private bool isSpeedBoostingActive = false;
-
-    private void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody>();
-        playerCollider = GetComponent<Collider>();
-    }
+        // External
+        private Rigidbody rb;
+        private Collider playerCollider;
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        movementInput = context.ReadValue<Vector2>();
-        if (movementInput.x != 0 && !isSpeedBoostingActive)
+        // Own
+        private Vector2 movementInput;
+        private Vector2 groundDirection;
+        private bool isJumpAvaiable = true;
+        //private bool isSpeedBoostingActive;
+
+        // Settings
+
+        [SerializeField] float speed = 5f;
+        [SerializeField] float jumpDelay = 0.5f;
+        [SerializeField] float jumpStrenght = 10f;
+        [SerializeField] LayerMask groundLayer;
+        [SerializeField] float raycastGroundCheck = 0.55f;
+        // [SerializeField] private float boostSpeed = 1f;
+        // [SerializeField] private float maxSpeedBoost = 2f;
+  
+
+        private void Awake()
         {
-            isSpeedBoostingActive = true;
-            //StartCoroutine(SpeedBoostIncreasing());
+            rb = GetComponent<Rigidbody>();
+            playerCollider = GetComponent<Collider>();
         }
-    }
 
-    //IEnumerator SpeedBoostIncreasing()
-    //{
-    //    StopCoroutine(SpeedBoostDecreasing());
-    //    while (movementInput.x != 0 && boostSpeed < maxSpeedBoosting)
-    //    {
-    //        boostSpeed += Time.deltaTime;
-    //        yield return null;
-    //    }
-    //    isSpeedBoostingActive = false;
-    //}
-
-    //IEnumerator SpeedBoostDecreasing()
-    //{
-    //    while (movementInput.x == 0 && boostSpeed > 1f)
-    //    {
-    //        boostSpeed -= Time.deltaTime;
-    //        yield return null;
-    //    }
-    //}
-
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (context.performed && isJumpAviable)
+        public void OnMove(InputAction.CallbackContext context)
         {
-            isJumpAviable = false;
-            StartCoroutine(GapForJump());
+            movementInput = context.ReadValue<Vector2>();
+            //if (movementInput.x != 0 /*&& !isSpeedBoostingActive*/)
+            //{
+            //    isSpeedBoostingActive = true;
+            //    //StartCoroutine(SpeedBoostIncreasing());
+            //}
+        }
+
+        //IEnumerator SpeedBoostIncreasing()
+        //{
+        //    StopCoroutine(SpeedBoostDecreasing());
+        //    while (movementInput.x != 0 && boostSpeed < maxSpeedBoosting)
+        //    {
+        //        boostSpeed += Time.deltaTime;
+        //        yield return null;
+        //    }
+        //    isSpeedBoostingActive = false;
+        //}
+
+        //IEnumerator SpeedBoostDecreasing()
+        //{
+        //    while (movementInput.x == 0 && boostSpeed > 1f)
+        //    {
+        //        boostSpeed -= Time.deltaTime;
+        //        yield return null;
+        //    }
+        //}
+
+        public void OnJump(InputAction.CallbackContext context)
+        {
+            if(!context.performed || !isJumpAvaiable) return;
+
+            isJumpAvaiable = false;
+            StartCoroutine(WaitForJump());
             rb.AddForce(-groundDirection * jumpStrenght, ForceMode.Impulse);
+            
             if (groundDirection.x != 0 && groundDirection.y == 0)
             {
                 rb.AddForce(Vector3.up * jumpStrenght, ForceMode.Impulse);
             }
         }
-    }
 
-    IEnumerator GapForJump()
-    {
-        yield return new WaitForSeconds(jumpGAP);
-        isJumpAviable = true;
-    }
-
-    void FixedUpdate()
-    {
-        DetermineIsGround();
-        if (movementInput.x != 0)
+        IEnumerator WaitForJump()
         {
-            rb.AddForce(Vector2.right * movementInput * speed /* *  boostSpeed*/, ForceMode.Force);
-        }
-        else if (movementInput.y != 0)
-        {
-            rb.AddForce(Vector2.left * movementInput * speed /* * boostSpeed*/, ForceMode.Force);
-        }
-        else
-        {
-            //StartCoroutine(SpeedBoostDecreasing());
-        }
-    }
-
-    private void DetermineIsGround()
-    {
-        Vector3 startPoint = playerCollider.bounds.center;
-        groundDirection = Vector3.zero;
-
-        if (Physics.Raycast(startPoint, Vector3.right, out var rightHit, raycastGroundCheck, groundLayer))
-        {
-            Debug.DrawRay(startPoint, Vector3.right * raycastGroundCheck, Color.cyan, Time.deltaTime);
-            groundDirection.x++;
+            yield return new WaitForSeconds(jumpDelay);
+            isJumpAvaiable = true;
         }
 
-        if (Physics.Raycast(startPoint, Vector3.left, out var leftHit, raycastGroundCheck, groundLayer))
+        void FixedUpdate()
         {
-            Debug.DrawRay(startPoint, Vector3.left * raycastGroundCheck, Color.cyan, Time.deltaTime);
-            groundDirection.x--;
+            DetermineIsGround();
+
+            if (movementInput.x != 0)
+            {
+                rb.AddForce(Vector2.right * movementInput * speed /* *  boostSpeed*/, ForceMode.Force);
+            }
+            else if (movementInput.y != 0)
+            {
+                rb.AddForce(Vector2.left * movementInput * speed /* * boostSpeed*/, ForceMode.Force);
+            }
+            else
+            {
+                //StartCoroutine(SpeedBoostDecreasing());
+            }
         }
 
-        if (Physics.Raycast(startPoint, Vector3.down, out var groundHit, raycastGroundCheck, groundLayer))
+        private void DetermineIsGround()
         {
-            Debug.DrawRay(startPoint, Vector3.down * raycastGroundCheck, Color.cyan, Time.deltaTime);
-            groundDirection.y--;
+            Vector3 startPoint = playerCollider.bounds.center;
+            groundDirection = Vector3.zero;
+
+            if(CastToDirection(startPoint, Vector3.right))
+                groundDirection.x++;
+
+            if (CastToDirection(startPoint, Vector3.left))
+                groundDirection.x--;
+
+            if (CastToDirection(startPoint, Vector3.down))
+                groundDirection.y--;
+        }
+
+        private bool CastToDirection(Vector3 startPoint, Vector3 direction)
+        {
+            if (!Physics.Raycast(startPoint, direction, raycastGroundCheck, groundLayer))
+            {
+                return false;
+            }
+            return true;
+
+            // NOTE: for debug
+            // Debug.DrawRay(startPoint, direction * raycastGroundCheck, Color.cyan, Time.deltaTime);
+
         }
     }
 }
+

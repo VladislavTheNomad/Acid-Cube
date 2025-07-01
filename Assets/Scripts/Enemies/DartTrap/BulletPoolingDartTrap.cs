@@ -1,42 +1,67 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class BulletPoolingDartTrap : MonoBehaviour
+namespace AcidCube
 {
-    [SerializeField] GameObject bullet;
-    [SerializeField] int countOfBullets;
-    private List<GameObject> pooledBullets;
-
-    private GameObject newBullet;
-
-    private void Awake()
+    public class BulletPoolingDartTrap : MonoBehaviour
     {
-        pooledBullets = new List<GameObject>();
 
-        for (int i = 0; i < countOfBullets; i++)
+        [SerializeField] GameObject bulletPrefab;
+
+        private ObjectPool<GameObject> bulletsPool;
+
+        private void Awake()
         {
-            newBullet = Instantiate(bullet);
+            bulletsPool = new ObjectPool<GameObject>(CreateNewBullet);
+
+            //pooledBullets = new List<GameObject>();
+
+            //for (int i = 0; i < countOfBullets; i++)
+            //{
+            //    newBullet = Instantiate(bulletPrefab);
+            //    newBullet.SetActive(false);
+            //    pooledBullets.Add(newBullet);
+            //}
+        }
+
+        private GameObject CreateNewBullet()
+        {
+            var newBullet = Instantiate(bulletPrefab);
             newBullet.SetActive(false);
-            pooledBullets.Add(newBullet);
+            return newBullet;
         }
-    }
 
-    public GameObject GetBulletFromPool()
-    {
-        for (int i =0; i < pooledBullets.Count; i++)
+        public GameObject GetBulletFromPool()
         {
-            if (!pooledBullets[i].activeInHierarchy)
-            {
-                return pooledBullets[i];
-            }
+            var bullet = bulletsPool.Get();
+            bullet.SetActive(true);
+            return bullet;
         }
-        return null;
-    }
 
-    public void RemoveBulletToPool(GameObject bullet)
-    {
-        bullet.SetActive(false);
-    }
+        public void ReleaseBullet(GameObject bullet)
+        {
+            bullet.SetActive(false);
+            bulletsPool.Release(bullet);
+        }
 
+        //public GameObject GetBulletFromPool()
+        //{
+        //    for (int i = 0; i < pooledBullets.Count; i++)
+        //    {
+        //        if (!pooledBullets[i].activeInHierarchy)
+        //        {
+        //            return pooledBullets[i];
+        //        }
+        //    }
+        //    return null;
+        //}
+
+        //public void RemoveBulletToPool(GameObject bullet)
+        //{
+        //    bullet.SetActive(false);
+        //}
+
+    }
 }

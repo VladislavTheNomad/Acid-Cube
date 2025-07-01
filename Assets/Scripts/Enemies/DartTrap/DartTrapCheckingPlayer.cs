@@ -1,62 +1,70 @@
 using System.Collections;
 using UnityEngine;
 
-public class DartTrap : MonoBehaviour
+namespace AcidCube
 {
-    [SerializeField] private GameObject bullet;
-    [SerializeField] public GameObject firingModule;
-    private BulletPoolingDartTrap bulletPool;
-
-    private GameObject newBullet;
-
-    private RaycastHit hit;
-    [SerializeField] LayerMask groundLayer;
-    public bool isShot = false;
-
-    private Coroutine nowFiringCoroutine;
-
-    private void Awake()
+    public class DartTrap : MonoBehaviour
     {
-        bulletPool = FindAnyObjectByType<BulletPoolingDartTrap>();
-    }
+        //[SerializeField] private GameObject bullet;
+        [SerializeField] public GameObject firingModule;
+        [SerializeField] LayerMask groundLayer;
+        [SerializeField] private float fireDelay = 2f;
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        private BulletPoolingDartTrap bulletPool;
+        private Coroutine nowFiringCoroutine;
+
+        private void Awake()
         {
+            // O(n) non-optimal method
+            bulletPool = FindAnyObjectByType<BulletPoolingDartTrap>();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.GetComponent<PlayerController>()) return;
+            
             float distanceToPlayer = Vector3.Distance(transform.position, other.transform.position);
-            Physics.Raycast(transform.position, other.transform.position - transform.position, out hit, distanceToPlayer, groundLayer);
-            Debug.DrawRay(transform.position, other.transform.position - transform.position, Color.blue, 10f);
-            if (hit.collider == null && !isShot) // Check if the collider property of RaycastHit is null
+            Vector3 deltaToPlayerFromObject = other.transform.position - firingModule.transform.position;
+            
+            
+            bool isAnyhit = Physics.Raycast(transform.position, deltaToPlayerFromObject, distanceToPlayer, groundLayer);
+
+            // NOTE: For tests  
+            //Debug.DrawRay(transform.position, deltaToPlayerFromObject, Color.blue, 10f);
+
+            if (!isAnyhit)
             {
                 nowFiringCoroutine = StartCoroutine(Firing());
-
             }
         }
-    }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        private void OnTriggerExit(Collider other)
         {
-            if (nowFiringCoroutine != null)
+            if (!other.GetComponent<PlayerController>()) return;
+            
+            if(nowFiringCoroutine != null) StopCoroutine(nowFiringCoroutine);
+            nowFiringCoroutine = null;
+        }
+
+        private IEnumerator Firing()
+        {
+            while (true)
             {
-                StopCoroutine(nowFiringCoroutine);
-                nowFiringCoroutine = null;
+                var newBullet = bulletPool.GetBulletFromPool();
+
+                newBullet.transform.SetLocalPositionAndRotation(
+                    firingModule.transform.position,
+                    firingModule.transform.rotation);
+
+                //newBullet.gameObject.SetActive(true);
+                yield return new WaitForSeconds(fireDelay);
+
+                //newBullet = bulletPool.GetBulletFromPool();
+                //newBullet.transform.position = firingModule.transform.position;
+                //newBullet.transform.rotation = firingModule.transform.rotation;
+                //newBullet.gameObject.SetActive(true);
+                //yield return new WaitForSeconds(2f);
             }
-        }
-    }
-
-
-    IEnumerator Firing()
-    {
-        while (true)
-        {
-            newBullet = bulletPool.GetBulletFromPool();
-            newBullet.transform.position = firingModule.transform.position;
-            newBullet.transform.rotation = firingModule.transform.rotation;
-            newBullet.gameObject.SetActive(true);
-            yield return new WaitForSeconds(2f);
         }
     }
 }
