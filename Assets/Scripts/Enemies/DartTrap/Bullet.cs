@@ -1,7 +1,7 @@
 using AcidCube;
 using UnityEngine;
 
-namespace Vlad.AcidCube
+namespace AcidCube
 {
     public class Bullet : MonoBehaviour
     {

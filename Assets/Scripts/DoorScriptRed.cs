@@ -1,24 +1,28 @@
 using UnityEngine;
 
-public class DoorScriptRed : MonoBehaviour
+namespace AcidCube
 {
-    private KeyCounterAndDisplayer gameManager;
-
-    private void Awake()
+    public class DoorScriptRed : MonoBehaviour
     {
-        gameManager = FindAnyObjectByType<KeyCounterAndDisplayer>();
-        if( gameManager == null)
-        {
-            Debug.Log("NO KeyCounterAndDisplayer component or GameManager GameObject");
-        }
-    }
+        private KeyCounterAndDisplayer gameManager;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Player") && gameManager.keys.Contains("red"))
+        private void Awake()
         {
-            Destroy(gameObject);
+            gameManager = FindAnyObjectByType<KeyCounterAndDisplayer>();
+            if (gameManager == null)
+            {
+                Debug.Log("NO KeyCounterAndDisplayer component or GameManager GameObject");
+            }
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.GetComponent<PlayerController>() && gameManager.keys.Contains("red"))
+            {
+                Destroy(gameObject);
+            }
+        }
+
     }
 
 }

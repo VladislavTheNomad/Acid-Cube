@@ -1,25 +1,30 @@
 using UnityEditor.Build.Content;
 using UnityEngine;
 
-public class GrabRedKey : MonoBehaviour
+namespace AcidCube
 {
-    [SerializeField] private KeyCounterAndDisplayer gameManager;
-    private string color = "red";
+    public class GrabRedKey : MonoBehaviour
+    {
+        [SerializeField] private KeyCounterAndDisplayer gameManager;
 
-    private void Awake()
-    {
-        gameManager = GameObject.Find("GameManager").GetComponent<KeyCounterAndDisplayer>();
-        if ( gameManager == null )
+        private string color = "red";
+
+        private void Awake()
         {
-            Debug.Log("NO KeyCounterAndDisplayer component or GameManager GameObject");
+            gameManager = GameObject.Find("GameManager").GetComponent<KeyCounterAndDisplayer>();
+
+            if (gameManager == null)
+            {
+                Debug.Log("NO KeyCounterAndDisplayer component or GameManager GameObject");
+            }
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        private void OnTriggerEnter(Collider other)
         {
-            gameManager.TakeAKey(color);
-            Destroy(gameObject);
+            if (other.GetComponent<PlayerController>())
+            {
+                gameManager.TakeAKey(color);
+                Destroy(gameObject);
+            }
         }
     }
 }

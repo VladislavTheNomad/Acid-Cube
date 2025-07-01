@@ -3,21 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class KeyCounterAndDisplayer : MonoBehaviour
+namespace AcidCube
 {
-    [SerializeField] private Image first;
-    [SerializeField] private Image second;
-    [SerializeField] private Image third;
-
-    public List<string> keys { get; private set; }
-
-    private void Awake()
+    public class KeyCounterAndDisplayer : MonoBehaviour
     {
-        keys = new List<string>();
-    }
-    public void TakeAKey(string color)
-    {
-        keys.Add(color);
-        first.gameObject.SetActive(true);
+        [SerializeField] private Image first; // red
+        [SerializeField] private Image second; // yellow
+        [SerializeField] private Image third; // blue
+
+        public List<string> keys { get; private set; }
+
+        private void Awake()
+        {
+            keys = new List<string>();
+        }
+        public void TakeAKey(string color)
+        {
+            keys.Add(color);
+
+            switch (color)
+            {
+                case "red":
+                    first.gameObject.SetActive(true);
+                    break;
+                case "yellow":
+                    second.gameObject.SetActive(true);
+                    break;
+                case "blue":
+                    third.gameObject.SetActive(true);
+                    break;
+
+                default:    
+                    break;
+            }
+        }
     }
 }

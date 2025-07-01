@@ -4330,19 +4330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOfDestroying: 1
-  crystallSharps:
-  - {fileID: 6839724057707079116}
-  - {fileID: 3122406632859393772}
-  - {fileID: 7372090799389034194}
-  - {fileID: 8148630314071788999}
-  - {fileID: 6967882741913127553}
-  - {fileID: 6979832591593220922}
-  - {fileID: 3641139584901862324}
-  - {fileID: 6043096694229414016}
-  - {fileID: 7925304028791751719}
-  - {fileID: 523468280962087392}
-  - {fileID: 8691274810844661036}
-  - {fileID: 2622143245431529047}
+  crystalShards: []
 --- !u!65 &7496123521456530794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4362,5 +4350,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5936604, y: 2, z: 1}
-  m_Center: {x: -0.003417015, y: 0.33000004, z: 0}
+  m_Size: {x: 3.5936604, y: 1.8098569, z: 1}
+  m_Center: {x: -0.003417015, y: 0.4250716, z: 0}
