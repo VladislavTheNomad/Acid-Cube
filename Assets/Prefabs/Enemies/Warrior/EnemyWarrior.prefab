@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8759082764207938215}
   - component: {fileID: 2175421509399185866}
   - component: {fileID: 5576158874559777946}
+  - component: {fileID: 2596476973308234476}
   m_Layer: 0
   m_Name: EnemyWarrior
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 571448752036832104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.645, y: 10.47, z: 1}
+  m_LocalPosition: {x: 39.34, y: 10.13, z: 1}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8fe624f83a41d4c42abb3ce6300cbc27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,3 +111,57 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2596476973308234476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571448752036832104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c56b2744f4e17847998c8b81090e24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPoints:
+  - {x: 39.36, y: 10.13, z: 1}
+  - {x: 39.86, y: 10.13, z: 1}
+  - {x: 40.36, y: 10.13, z: 1}
+  - {x: 40.86, y: 10.13, z: 1}
+  - {x: 41.36, y: 10.13, z: 1}
+  - {x: 41.86, y: 10.13, z: 1}
+  - {x: 42.36, y: 10.13, z: 1}
+  - {x: 42.86, y: 10.13, z: 1}
+  - {x: 43.36, y: 10.13, z: 1}
+  - {x: 43.86, y: 10.13, z: 1}
+  - {x: 44.36, y: 10.13, z: 1}
+  - {x: 43.86, y: 10.13, z: 1}
+  - {x: 43.36, y: 10.13, z: 1}
+  - {x: 42.86, y: 10.13, z: 1}
+  - {x: 42.36, y: 10.13, z: 1}
+  - {x: 41.86, y: 10.13, z: 1}
+  - {x: 41.36, y: 10.13, z: 1}
+  - {x: 40.86, y: 10.13, z: 1}
+  - {x: 40.36, y: 10.13, z: 1}
+  - {x: 39.86, y: 10.13, z: 1}
+  - {x: 39.36, y: 10.13, z: 1}
+  - {x: 38.86, y: 10.13, z: 1}
+  - {x: 38.36, y: 10.13, z: 1}
+  - {x: 37.86, y: 10.13, z: 1}
+  - {x: 37.36, y: 10.13, z: 1}
+  - {x: 36.86, y: 10.13, z: 1}
+  - {x: 36.36, y: 10.13, z: 1}
+  - {x: 35.86, y: 10.13, z: 1}
+  - {x: 35.36, y: 10.13, z: 1}
+  - {x: 34.86, y: 10.13, z: 1}
+  - {x: 34.36, y: 10.13, z: 1}
+  - {x: 33.86, y: 10.13, z: 1}
+  - {x: 33.36, y: 10.13, z: 1}
+  - {x: 32.86, y: 10.13, z: 1}
+  howMuchTimeNeedsToNextPoint: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  enemySpeed: 1
+  goToRight: 0
+  goToLeft: 1

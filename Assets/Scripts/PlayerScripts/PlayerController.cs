@@ -109,11 +109,27 @@ namespace AcidCube
             Vector3 startPoint = playerCollider.bounds.center;
             groundDirection = Vector3.zero;
 
-            if(CastToDirection(startPoint, Vector3.right))
+            if (CastToDirection(startPoint, Vector3.right))
+            {
                 groundDirection.x++;
+                //if(movementInput.x != 0)
+                //{
+                //    Vector3 scale = transform.localScale;
+                //    scale.y += 0.05f;
+                //    transform.localScale = scale;
+                //}
+            }
 
             if (CastToDirection(startPoint, Vector3.left))
+            {
                 groundDirection.x--;
+                //if (movementInput.x != 0)
+                //{
+                //    Vector3 scale = transform.localScale;
+                //    scale.y += 0.05f;
+                //    transform.localScale = scale;
+                //}
+            }
 
             if (CastToDirection(startPoint, Vector3.down))
                 groundDirection.y--;
