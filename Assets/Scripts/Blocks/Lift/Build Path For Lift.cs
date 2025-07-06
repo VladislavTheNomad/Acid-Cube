@@ -56,6 +56,12 @@ namespace AcidCube
             if (hasPower) currentCoroutine = StartCoroutine(GoLift());
         }
 
+        public void GetPower()
+        {
+            hasPower = true;
+            currentCoroutine = StartCoroutine(GoLift());
+        }
+
         private bool CheckPath(Vector3 path)
         {
             isTrailHere = Physics.Raycast(pathPoints.Last() + path, -Vector3.forward, 1f, liftTrail);
