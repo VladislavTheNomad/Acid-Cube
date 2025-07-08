@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 namespace AcidCube
@@ -24,8 +23,11 @@ namespace AcidCube
         private Vector3 stepLeft = new Vector3(-0.2f, 0f, 0f);
         private int currentPointIndex;
 
+        private Rigidbody rb;
+
         private void Awake()
         {
+            rb = GetComponent<Rigidbody>();
             ConstructPath();
         }
 
@@ -76,18 +78,18 @@ namespace AcidCube
         [ContextMenu("Go Lift")]
         private IEnumerator GoLift()
         {
-            for (int i = currentPointIndex; i < pathPoints.Count-1; i++)
-            {
-                yield return StartCoroutine(GoToNextPoint(pathPoints[i], pathPoints[i + 1]));
-                currentPointIndex++;
-            }
-
+            for (int i = currentPointIndex; i < pathPoints.Count - 1; i++)
+                {
+                    yield return StartCoroutine(GoToNextPoint(pathPoints[i], pathPoints[i + 1]));
+                    currentPointIndex++;
+                }
+            
             for (int i = currentPointIndex; i > 0; i--)
-            {
-                yield return StartCoroutine(GoToNextPoint(pathPoints[i], pathPoints[i - 1]));
-                currentPointIndex--;
-            }
-
+                {
+                    yield return StartCoroutine(GoToNextPoint(pathPoints[i], pathPoints[i - 1]));
+                    currentPointIndex--;
+                }
+            
             if (hasPower) StartCoroutine(GoLift());
         }
 
@@ -99,7 +101,7 @@ namespace AcidCube
             {
                 elapsedTime += Time.deltaTime;
                 progress = elapsedTime / howMuchTimeNeedsToNextPoint;
-                transform.position = Vector3.Lerp(currentPoint, nextPoint, progress);
+                rb.MovePosition(Vector3.Lerp(currentPoint, nextPoint, progress));
                 yield return null;
             }
         }

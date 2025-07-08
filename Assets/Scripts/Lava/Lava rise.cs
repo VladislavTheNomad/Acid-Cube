@@ -1,3 +1,4 @@
+using AcidCube;
 using System.Collections;
 using UnityEngine;
 
@@ -12,7 +13,6 @@ public class Lava—ontroller : MonoBehaviour
     void Start()
     {
         startPositionY = transform.position.y; //start point of Lava
-        //endPositionY = startPositionY + 100f; // At the moment the endpoint is implemented using input in Insector
         StartCoroutine(LavaIsMoving());
     }
 
@@ -30,9 +30,7 @@ public class Lava—ontroller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            GameOverMenu.instance.OpenGameOverMenu();
-        }
+        if (!other.GetComponent<PlayerController>()) return;
+        GameOverMenu.instance.OpenGameOverMenu();
     }
 }

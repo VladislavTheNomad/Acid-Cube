@@ -151,12 +151,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
-  jumpGAP: 0.6
+  jumpDelay: 0.4
   jumpStrenght: 10
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  raycastGroundCheck: 0.4
+  raycastGroundCheck: 0.375
 --- !u!114 &6900196591160858679
 MonoBehaviour:
   m_ObjectHideFlags: 0

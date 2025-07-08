@@ -1,47 +1,61 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOverMenu : MonoBehaviour
+namespace AcidCube 
 {
-    [SerializeField] private GameObject gameOverMenu;
-
-    public static GameOverMenu instance { get; private set; }
-
-    private void Awake()
+    public class GameOverMenu : MonoBehaviour
     {
-        if (instance == null)
+        [SerializeField] private GameObject _gameOverMenu;
+        [SerializeField] private SavingProgress savingProgress;
+        [SerializeField] private Lava—ontroller lavaBlock;
+        private PlayerController player;
+
+        public static GameOverMenu instance { get; private set; }
+
+        private void Awake()
         {
-            instance = this;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if (instance != null)
+            {
+                Destroy(gameObject);
+            }
+            player = FindAnyObjectByType<PlayerController>();
         }
-        else if (instance != null)
+
+
+        // MENU INTERFACE
+
+        public void OpenGameOverMenu()
         {
-            Destroy(gameObject);
+            if (savingProgress.pointOfRestart.transform.position.y > lavaBlock.transform.position.y + 6f)
+            {
+                player.transform.position = savingProgress.pointOfRestart.transform.position;
+            }
+            else 
+            {
+                _gameOverMenu.SetActive(true);
+                Time.timeScale = 0f;
+            }
         }
-    }
 
+        // BUTTON "RETRY"
 
-    // PAUSE MENU INTERFACE
+        public void RetryTheGame()
+        {
+            Time.timeScale = 1f;
+            Scene currentLevel = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentLevel.name);
+        }
 
-    public void OpenGameOverMenu()
-    {
-        gameOverMenu.SetActive(true);
-        Time.timeScale = 0f;
-    }
+        // BUTTON "QUIT"
 
-    // BUTTON "RETRY"
-
-    public void RetryTheGame()
-    {
-        Time.timeScale = 1f;
-        Scene currentLevel = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentLevel.name);
-    }
-
-    // BUTTON "QUIT"
-
-    public void QuitToMainMenu()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        public void QuitToMainMenu()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }
