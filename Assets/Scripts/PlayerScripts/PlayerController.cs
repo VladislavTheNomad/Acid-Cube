@@ -16,7 +16,7 @@ namespace AcidCube
         // Own
         private Vector2 movementInput;
         private Vector2 groundDirection;
-        private bool isJumpAvaiable = true;
+        private bool isJumpAvailable = true;
         //private bool isSpeedBoostingActive;
 
         // Settings
@@ -68,25 +68,33 @@ namespace AcidCube
 
         public void OnJump(InputAction.CallbackContext context)
         {
-            if(!context.performed || !isJumpAvaiable) return;
+            if(!context.performed || !isJumpAvailable) return;
 
-            isJumpAvaiable = false;
+            isJumpAvailable = false;
             StartCoroutine(WaitForJump());
-            rb.AddForce(-groundDirection * jumpStrenght, ForceMode.Impulse);
             
-            if (groundDirection.x != 0 && groundDirection.y == 0)
+            if(groundDirection.y != 0)
             {
-                rb.AddForce(Vector3.up * jumpStrenght, ForceMode.Impulse);
+                rb.AddForce(new Vector3(0, 1f, 0f) * jumpStrenght, ForceMode.Impulse);
             }
+
+            else if (groundDirection.x != 0 && groundDirection.y == 0)
+            {
+                rb.AddForce(new Vector3(-groundDirection.x, 1f, 0f) * jumpStrenght, ForceMode.Impulse);
+            }
+            //else
+            //{
+            //    rb.AddForce(-groundDirection * jumpStrenght, ForceMode.Impulse);
+            //}
         }
 
-        IEnumerator WaitForJump()
+        private IEnumerator WaitForJump()
         {
             yield return new WaitForSeconds(jumpDelay);
-            isJumpAvaiable = true;
+            isJumpAvailable = true;
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             DetermineIsGround();
 
@@ -112,23 +120,11 @@ namespace AcidCube
             if (CastToDirection(startPoint, Vector3.right))
             {
                 groundDirection.x++;
-                //if(movementInput.x != 0)
-                //{
-                //    Vector3 scale = transform.localScale;
-                //    scale.y += 0.05f;
-                //    transform.localScale = scale;
-                //}
             }
 
             if (CastToDirection(startPoint, Vector3.left))
             {
                 groundDirection.x--;
-                //if (movementInput.x != 0)
-                //{
-                //    Vector3 scale = transform.localScale;
-                //    scale.y += 0.05f;
-                //    transform.localScale = scale;
-                //}
             }
 
             if (CastToDirection(startPoint, Vector3.down))

@@ -1,11 +1,14 @@
-using AcidCube;
+
 using UnityEngine;
 
-public class Spike : MonoBehaviour
+namespace AcidCube
 {
-    private void OnTriggerEnter(Collider other)
+    public class Spike : MonoBehaviour
     {
-        if (!other.GetComponent<PlayerController>()) return;
-        GameOverMenu.instance.OpenGameOverMenu();
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.GetComponent<PlayerController>()) return;
+            GameOverMenu.instance.OpenGameOverMenu();
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,9 +9,12 @@ namespace AcidCube
         [SerializeField] private GameObject _gameOverMenu;
         [SerializeField] private SavingProgress savingProgress;
         [SerializeField] private LavaÑontroller lavaBlock;
+
         private PlayerController player;
 
         public static GameOverMenu instance { get; private set; }
+
+        public static event Action OnGameOverTriggered;
 
         private void Awake()
         {
@@ -30,6 +34,8 @@ namespace AcidCube
 
         public void OpenGameOverMenu()
         {
+            OnGameOverTriggered?.Invoke();
+
             if (savingProgress.pointOfRestart.transform.position.y > lavaBlock.transform.position.y + 6f)
             {
                 player.transform.position = savingProgress.pointOfRestart.transform.position;

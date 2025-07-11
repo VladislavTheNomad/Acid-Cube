@@ -3,74 +3,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeBlockAlarm : MonoBehaviour
+namespace AcidCube
 {
-
-    [SerializeField] private GameObject[] spikes;
-
-    private float currentY;
-    private float startPositionY;
-    private float endPositionY;
-    [SerializeField] private float movePositionY;
-    [SerializeField] private float timeForSpikeMoving;
-
-
-    private void Awake()
+    public class SpikeBlockAlarm : MonoBehaviour
     {
-        startPositionY = spikes[0].transform.localPosition.y;
-        endPositionY = startPositionY + movePositionY;
-    }
 
+        [SerializeField] private GameObject[] spikes;
+        [SerializeField] private float movePositionY;
+        [SerializeField] private float timeForSpikeMoving;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        private float currentY;
+        private float startPositionY;
+        private float endPositionY;
+
+        private void Awake()
         {
-            foreach (var item in spikes)
+            startPositionY = spikes[0].transform.localPosition.y;
+            endPositionY = startPositionY + movePositionY;
+        }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
             {
-                StartCoroutine(SpikeMoving(item));
+                foreach (var item in spikes)
+                {
+                    StartCoroutine(SpikeMoving(item));
+                }
             }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        private void OnTriggerExit(Collider other)
         {
-            foreach (var item in spikes)
+            if (other.CompareTag("Player"))
             {
-                StartCoroutine(SpikeClosing(item));
+                foreach (var item in spikes)
+                {
+                    StartCoroutine(SpikeClosing(item));
+                }
+
+            }
+        }
+
+
+        private IEnumerator SpikeMoving(GameObject item)
+        {
+            float elapsedTimeForSpike = 0f;
+            float nowPositionY = item.transform.localPosition.y; // get local Y 
+            while (elapsedTimeForSpike < timeForSpikeMoving)
+            {
+                elapsedTimeForSpike += Time.deltaTime;
+                currentY = Mathf.Lerp(nowPositionY, endPositionY, elapsedTimeForSpike / timeForSpikeMoving);
+                item.transform.localPosition = new Vector3(item.transform.localPosition.x, currentY, item.transform.localPosition.z);
+                yield return null;
             }
 
         }
-    }
 
-
-    IEnumerator SpikeMoving(GameObject item)
-    {
-        float elapsedTimeForSpike = 0f;
-        float nowPositionY = item.transform.localPosition.y; // get local Y 
-        while (elapsedTimeForSpike < timeForSpikeMoving)
+        private IEnumerator SpikeClosing(GameObject item)
         {
-            elapsedTimeForSpike += Time.deltaTime;
-            currentY = Mathf.Lerp(nowPositionY, endPositionY, elapsedTimeForSpike/timeForSpikeMoving);
-            item.transform.localPosition = new Vector3(item.transform.localPosition.x, currentY, item.transform.localPosition.z);
-            yield return null;
+            float elapsedTimeForSpike = 0f;
+            float nowPositionY = item.transform.localPosition.y; // get local Y 
+            while (elapsedTimeForSpike < timeForSpikeMoving)
+            {
+                elapsedTimeForSpike += Time.deltaTime;
+                currentY = Mathf.Lerp(nowPositionY, startPositionY, elapsedTimeForSpike / timeForSpikeMoving);
+                item.transform.localPosition = new Vector3(item.transform.localPosition.x, currentY, item.transform.localPosition.z);
+                yield return null;
+            }
         }
-        
-    }
 
-    IEnumerator SpikeClosing(GameObject item)
-    {
-        float elapsedTimeForSpike = 0f;
-        float nowPositionY = item.transform.localPosition.y; // get local Y 
-        while (elapsedTimeForSpike < timeForSpikeMoving)
-        {
-            elapsedTimeForSpike += Time.deltaTime;
-            currentY = Mathf.Lerp(nowPositionY, startPositionY, elapsedTimeForSpike / timeForSpikeMoving);
-            item.transform.localPosition = new Vector3(item.transform.localPosition.x, currentY, item.transform.localPosition.z);
-            yield return null;
-        }
     }
-
 }

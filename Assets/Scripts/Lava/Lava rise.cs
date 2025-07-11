@@ -1,36 +1,41 @@
-using AcidCube;
+
 using System.Collections;
 using UnityEngine;
 
-public class Lava—ontroller : MonoBehaviour
+namespace AcidCube
 {
-    [SerializeField] float startPositionY;
-    [SerializeField] float endPositionY;
-    [SerializeField] float timeForReachingEndPoint;
 
-    private float currentlyY;
-
-    void Start()
+    public class Lava—ontroller : MonoBehaviour
     {
-        startPositionY = transform.position.y; //start point of Lava
-        StartCoroutine(LavaIsMoving());
-    }
 
-    IEnumerator LavaIsMoving()
-    {
-        float elapsedTime = 0f; // detect progress over time
-        while (elapsedTime < timeForReachingEndPoint)
+        [SerializeField] private float endPositionY;
+        [SerializeField] private float timeForReachingEndPoint;
+
+        private float currentlyY;
+        private float startPositionY;
+
+        private void Start()
         {
-            elapsedTime += Time.deltaTime;
-            currentlyY = Mathf.Lerp(startPositionY, endPositionY, elapsedTime/timeForReachingEndPoint); // get linear progress along Y axis of the Lava from start to finish 
-            transform.position = new Vector3(transform.position.x, currentlyY, transform.position.z);
-            yield return null;
+            startPositionY = transform.position.y; //start point of Lava
+            StartCoroutine(LavaIsMoving());
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.GetComponent<PlayerController>()) return;
-        GameOverMenu.instance.OpenGameOverMenu();
+        private IEnumerator LavaIsMoving()
+        {
+            float elapsedTime = 0f; // detect progress over time
+            while (elapsedTime < timeForReachingEndPoint)
+            {
+                elapsedTime += Time.deltaTime;
+                currentlyY = Mathf.Lerp(startPositionY, endPositionY, elapsedTime / timeForReachingEndPoint); // get linear progress along Y axis of the Lava from start to finish 
+                transform.position = new Vector3(transform.position.x, currentlyY, transform.position.z);
+                yield return null;
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.GetComponent<PlayerController>()) return;
+            GameOverMenu.instance.OpenGameOverMenu();
+        }
     }
 }

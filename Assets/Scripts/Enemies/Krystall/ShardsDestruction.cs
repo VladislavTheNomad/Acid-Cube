@@ -8,9 +8,9 @@ namespace AcidCube
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.GetComponent<PlayerController>())
             {
-                if (other.CompareTag("Player"))
+                if (other.GetComponent<PlayerController>())
                 {
-                    Debug.Log("Player got crystal shard");
+                    GameOverMenu.instance.OpenGameOverMenu();
                 }
                 Destroy(gameObject);
             }

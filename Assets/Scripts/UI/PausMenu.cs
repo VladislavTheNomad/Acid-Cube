@@ -1,44 +1,48 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PausMenu : MonoBehaviour
+namespace AcidCube
 {
-    [SerializeField] private GameObject pauseMenu;
 
-
-    // PAUSE MENU INTERFACE
-    public void OpenOrClosePauseMenu()
+    public class PausMenu : MonoBehaviour
     {
-        if (pauseMenu.activeSelf == true)
+        [SerializeField] private GameObject pauseMenu;
+
+
+        // PAUSE MENU INTERFACE
+        public void OpenOrClosePauseMenu()
         {
-            pauseMenu.SetActive(false);
+            if (pauseMenu.activeSelf == true)
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1f;
+            }
+            else
+            {
+                OpenPauseMenu();
+            }
+        }
+        private void OpenPauseMenu()
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0.05f;
+        }
+
+        // BUTTON "RETRY"
+
+        public void RetryTheGame()
+        {
             Time.timeScale = 1f;
+            Scene currentLevel = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentLevel.name);
         }
-        else
+
+        // BUTTON "QUIT"
+
+        public void QuitToMainMenu()
         {
-            OpenPauseMenu();
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("MainMenu");
         }
-    }
-    private void OpenPauseMenu()
-    {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0.05f;
-    }
-
-    // BUTTON "RETRY"
-
-    public void RetryTheGame()
-    {
-        Time.timeScale = 1f;
-        Scene currentLevel = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentLevel.name);
-    }
-
-    // BUTTON "QUIT"
-
-    public void QuitToMainMenu()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
     }
 }
