@@ -246,3 +246,4 @@ MonoBehaviour:
   isMoving: 1
   waitngTimeBetweenAnimations: 1.2
   isUpToDownMovement: 1
+  deathBlock: {fileID: 6639238971786900556}

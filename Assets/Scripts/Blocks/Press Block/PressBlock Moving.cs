@@ -10,7 +10,7 @@ namespace AcidCube
         [SerializeField] private bool isMoving;
         [SerializeField] private float waitngTimeBetweenAnimations;
         [SerializeField] private bool isUpToDownMovement = true;
-        //[SerializeField]
+        [SerializeField] private GameObject deathBlock;
         //[SerializeField]
 
         private Animator anim;
@@ -33,9 +33,11 @@ namespace AcidCube
         private IEnumerator Moving()
         {
             yield return new WaitForSeconds(waitngTimeBetweenAnimations);
+            deathBlock.SetActive(false);
             anim.SetTrigger("GoUp");
             yield return new WaitForSeconds(waitngTimeBetweenAnimations);
             anim.SetTrigger("GoDown");
+            deathBlock.SetActive(true);
             currentCoroutine = StartCoroutine(Moving());
         }
     }
