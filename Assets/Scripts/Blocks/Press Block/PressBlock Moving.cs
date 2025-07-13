@@ -11,7 +11,6 @@ namespace AcidCube
         [SerializeField] private float waitngTimeBetweenAnimations;
         [SerializeField] private bool isUpToDownMovement = true;
         [SerializeField] private GameObject deathBlock;
-        //[SerializeField]
 
         private Animator anim;
         private Coroutine currentCoroutine;

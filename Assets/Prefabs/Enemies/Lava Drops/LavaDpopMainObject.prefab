@@ -185,11 +185,10 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8631394290877362513}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48ddac4d98ab7874ca67b9ab8b92f8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPositionY: 0
   endPositionY: 0
   timeForReachingEndPoint: 0

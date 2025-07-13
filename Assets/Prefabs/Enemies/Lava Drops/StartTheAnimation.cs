@@ -6,9 +6,10 @@ namespace AcidCube
 {
     public class StartTheAnimation : MonoBehaviour
     {
-        private Animator anim;
 
-        [SerializeField] private float animationDelay;
+        [SerializeField] private float delayBeforeStart;
+
+        private Animator anim;
 
         private void Awake()
         {
@@ -19,7 +20,7 @@ namespace AcidCube
 
         private IEnumerator PauseAnim()
         {
-            yield return new WaitForSeconds(animationDelay);
+            yield return new WaitForSeconds(delayBeforeStart);
             anim.SetBool("hasStart", true);
         }
     }
