@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 namespace AcidCube
 {
@@ -12,12 +9,12 @@ namespace AcidCube
         // External
         private Rigidbody rb;
         private Collider playerCollider;
+        public Renderer playerRenderer;
 
         // Own
         private Vector2 movementInput;
         private Vector2 groundDirection;
         private bool isJumpAvailable = true;
-        //private bool isSpeedBoostingActive;
 
         // Settings
 
@@ -26,45 +23,19 @@ namespace AcidCube
         [SerializeField] float jumpStrenght = 10f;
         [SerializeField] LayerMask groundLayer;
         [SerializeField] float raycastGroundCheck = 0.55f;
-        // [SerializeField] private float boostSpeed = 1f;
-        // [SerializeField] private float maxSpeedBoost = 2f;
   
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
             playerCollider = GetComponent<Collider>();
+            playerRenderer = GetComponent<Renderer>();
         }
 
         public void OnMove(InputAction.CallbackContext context)
         {
             movementInput = context.ReadValue<Vector2>();
-            //if (movementInput.x != 0 /*&& !isSpeedBoostingActive*/)
-            //{
-            //    isSpeedBoostingActive = true;
-            //    //StartCoroutine(SpeedBoostIncreasing());
-            //}
         }
-
-        //IEnumerator SpeedBoostIncreasing()
-        //{
-        //    StopCoroutine(SpeedBoostDecreasing());
-        //    while (movementInput.x != 0 && boostSpeed < maxSpeedBoosting)
-        //    {
-        //        boostSpeed += Time.deltaTime;
-        //        yield return null;
-        //    }
-        //    isSpeedBoostingActive = false;
-        //}
-
-        //IEnumerator SpeedBoostDecreasing()
-        //{
-        //    while (movementInput.x == 0 && boostSpeed > 1f)
-        //    {
-        //        boostSpeed -= Time.deltaTime;
-        //        yield return null;
-        //    }
-        //}
 
         public void OnJump(InputAction.CallbackContext context)
         {
@@ -82,10 +53,6 @@ namespace AcidCube
             {
                 rb.AddForce(new Vector3(-groundDirection.x, 1f, 0f) * jumpStrenght, ForceMode.Impulse);
             }
-            //else
-            //{
-            //    rb.AddForce(-groundDirection * jumpStrenght, ForceMode.Impulse);
-            //}
         }
 
         private IEnumerator WaitForJump()
@@ -106,15 +73,11 @@ namespace AcidCube
             {
                 rb.AddForce(Vector2.left * movementInput * speed /* * boostSpeed*/, ForceMode.Force);
             }
-            else
-            {
-                //StartCoroutine(SpeedBoostDecreasing());
-            }
         }
 
         private void DetermineIsGround()
         {
-            Vector3 startPoint = playerCollider.bounds.center;
+            Vector3 startPoint = playerCollider.bounds.center + new Vector3(0f, 0f, -0.4f);
             groundDirection = Vector3.zero;
 
             if (CastToDirection(startPoint, Vector3.right))

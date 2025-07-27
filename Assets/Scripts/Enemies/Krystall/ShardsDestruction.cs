@@ -8,10 +8,6 @@ namespace AcidCube
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.GetComponent<PlayerController>())
             {
-                if (other.GetComponent<PlayerController>())
-                {
-                    GameOverMenu.instance.OpenGameOverMenu();
-                }
                 Destroy(gameObject);
             }
         }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8517192583203728743}
   - component: {fileID: 8904966771213021435}
   - component: {fileID: 2241963708500194434}
+  - component: {fileID: -8282523305152029000}
   m_Layer: 3
   m_Name: Lift
   m_TagString: Ground
@@ -123,12 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac2b120a1bb63f4caa7140a0a25979f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  liftMovingScript: {fileID: -8282523305152029000}
   pathPoints: []
   liftTrail:
     serializedVersion: 2
     m_Bits: 128
-  howMuchTimeNeedsToNextPoint: 0
-  hasPower: 0
+  currentPointIndex: 0
 --- !u!114 &8904966771213021435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liftScript: {fileID: 8517192583203728743}
+  liftMovingScript: {fileID: -8282523305152029000}
 --- !u!54 &2241963708500194434
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,3 +171,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8282523305152029000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158321530326111635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7e3ef48ad68924ab891cd122310f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  liftScript: {fileID: 8517192583203728743}
+  hasPower: 1
+  howMuchTimeNeedsToNextPoint: 0

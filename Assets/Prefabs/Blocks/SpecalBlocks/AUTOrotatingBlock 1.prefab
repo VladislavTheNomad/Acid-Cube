@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2807058241369006793}
   - component: {fileID: 8767586443351288099}
   - component: {fileID: 7379149576265797855}
-  - component: {fileID: 1988551894728715254}
+  - component: {fileID: -5995785399035753499}
   m_Layer: 3
   m_Name: AUTOrotatingBlock 1
   m_TagString: Ground
@@ -109,7 +109,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1988551894728715254
+--- !u!114 &-5995785399035753499
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

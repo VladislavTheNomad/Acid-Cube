@@ -8,10 +8,9 @@ namespace AcidCube
     {
         [SerializeField] private GameObject _gameOverMenu;
         [SerializeField] private SavingProgress savingProgress;
-        [SerializeField] private LavaÑontroller lavaBlock;
+        [SerializeField] private LavaController lavaBlock;
 
         private PlayerController player;
-
         public static GameOverMenu instance { get; private set; }
 
         public static event Action OnGameOverTriggered;
@@ -36,7 +35,7 @@ namespace AcidCube
         {
             OnGameOverTriggered?.Invoke();
 
-            if (savingProgress.pointOfRestart.transform.position.y > lavaBlock.transform.position.y + 6f)
+            if (savingProgress.pointOfRestart.transform.position.y > lavaBlock.transform.position.y + 5.5f)
             {
                 player.transform.position = savingProgress.pointOfRestart.transform.position;
             }

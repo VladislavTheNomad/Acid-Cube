@@ -17,10 +17,15 @@ namespace AcidCube
         private List<Quaternion> startRotations;
         private List<Vector3> endPositions;
         private List<Quaternion> endRotations;
-        private int dice;
+
         private bool isActivated;
 
         private void Awake()
+        {
+            BuildAnimationOfDestruction();  
+        }
+
+        private void BuildAnimationOfDestruction()
         {
             foreach (Transform child in transform)
             {
@@ -34,33 +39,24 @@ namespace AcidCube
 
             for (int i = 0; i < crystalShards.Count; i++)
             {
-                if (crystalShards[i] != null)
-                {
-                    startPositions.Add(crystalShards[i].transform.localPosition);
-                    startRotations.Add(crystalShards[i].transform.rotation);
-                    dice = Random.Range(0, 2);
-                    if (dice == 0)
-                    {
-                        endPositions.Add(startPositions[i] + new Vector3(5f, Random.Range(0f, 5f), 0));
-                    }
-                    else
-                    {
-                        endPositions.Add(startPositions[i] + new Vector3(-5f, Random.Range(0f, 5f), 0));
-                    }
+                if (crystalShards[i] == null) break;
 
-                    endRotations.Add(Quaternion.Euler(startRotations[i].x + Random.Range(-180f, 180f), startRotations[i].y + Random.Range(-180f, 180f), startRotations[i].z + Random.Range(-180f, 180f)));
-                }
+                startPositions.Add(crystalShards[i].transform.localPosition);
+                startRotations.Add(crystalShards[i].transform.rotation);
+
+                int dice = DirectionUtils.ToSign(Random.value > 0.5f ? Direction.Right : Direction.Left);
+                const float maxRange = 5.0f;
+                endPositions.Add(startPositions[i] + new Vector3(maxRange * dice, Random.Range(0f, maxRange), 0));
+                endRotations.Add(Random.rotation);
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<PlayerController>() && isActivated == false)
-            {
-                isActivated = true;
-                Apart();
-                StartCoroutine(TimeBeforeDestoy());
-            }
+            if (!other.GetComponent<PlayerController>() || isActivated) return;
+            isActivated = true;
+            Apart();
+            StartCoroutine(TimeBeforeDestoy());
         }
 
         [ContextMenu("Apart")]

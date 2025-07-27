@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 129592971564370658}
   - component: {fileID: 6494978871790485488}
   - component: {fileID: 6832854408823193987}
-  - component: {fileID: 761958659812955191}
+  - component: {fileID: 2033919694922366308}
   m_Layer: 0
   m_Name: Spike 1
   m_TagString: Untagged
@@ -406,7 +406,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &761958659812955191
+--- !u!114 &2033919694922366308
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,7 +415,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2778294526470795066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 575b7ac80eba12743aeec3364d3dd3da, type: 3}
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2847904109229125415
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 478944570087246184}
   - component: {fileID: 3842937940056707270}
   - component: {fileID: 3499499190797698250}
-  - component: {fileID: 7875457520933938122}
+  - component: {fileID: 2143433880609284236}
   m_Layer: 0
   m_Name: Spike 3
   m_TagString: Untagged
@@ -529,7 +529,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &7875457520933938122
+--- !u!114 &2143433880609284236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -538,7 +538,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2847904109229125415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 575b7ac80eba12743aeec3364d3dd3da, type: 3}
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3699195356697974198
@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 3336401994109242357}
   - component: {fileID: 8432336669282669071}
   - component: {fileID: 8299669281804919375}
-  - component: {fileID: 7607365667832446672}
+  - component: {fileID: 7371663623697784767}
   m_Layer: 0
   m_Name: Spike 2
   m_TagString: Untagged
@@ -652,7 +652,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &7607365667832446672
+--- !u!114 &7371663623697784767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3699195356697974198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 575b7ac80eba12743aeec3364d3dd3da, type: 3}
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7909503209894820116

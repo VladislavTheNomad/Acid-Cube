@@ -1,4 +1,3 @@
-using AcidCube;
 using UnityEngine;
 
 namespace AcidCube
@@ -22,9 +21,14 @@ namespace AcidCube
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<PlayerController>() || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
                 bulletPool.ReleaseBullet(gameObject);
+            }
+            else if (other.gameObject.GetComponent<PlayerController>())
+            {
+                bulletPool.ReleaseBullet(gameObject);
+                GameOverMenu.instance.OpenGameOverMenu();
             }
 
         }

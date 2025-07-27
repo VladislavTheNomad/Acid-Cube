@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2536566388972455528}
   - component: {fileID: 7392162965408832178}
   - component: {fileID: 359542938169760212}
+  - component: {fileID: 6101914150191784667}
   m_Layer: 0
   m_Name: Prism (9)
   m_TagString: Untagged
@@ -356,6 +357,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6101914150191784667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523468280962087392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2622143245431529047
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +385,7 @@ GameObject:
   - component: {fileID: 1028584764972762992}
   - component: {fileID: 103530909304263783}
   - component: {fileID: 8936159173786811035}
+  - component: {fileID: 8611982588263329941}
   m_Layer: 0
   m_Name: Prism (11)
   m_TagString: Untagged
@@ -712,6 +726,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8611982588263329941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2622143245431529047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3122406632859393772
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +754,7 @@ GameObject:
   - component: {fileID: 7046676008117222449}
   - component: {fileID: 9202882474274434012}
   - component: {fileID: 4874528780968434664}
+  - component: {fileID: 707253384901467075}
   m_Layer: 0
   m_Name: Prism (1)
   m_TagString: Untagged
@@ -1068,6 +1095,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &707253384901467075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3122406632859393772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3641139584901862324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1123,7 @@ GameObject:
   - component: {fileID: 5171476682468615106}
   - component: {fileID: 1796403603231046278}
   - component: {fileID: 5963165846536674775}
+  - component: {fileID: 6734644760079570591}
   m_Layer: 0
   m_Name: Prism (6)
   m_TagString: Untagged
@@ -1424,6 +1464,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6734644760079570591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3641139584901862324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6043096694229414016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,6 +1492,7 @@ GameObject:
   - component: {fileID: 6644170915042411723}
   - component: {fileID: 87853097577629926}
   - component: {fileID: 4285144049324149750}
+  - component: {fileID: 4195799374852245883}
   m_Layer: 0
   m_Name: Prism (7)
   m_TagString: Untagged
@@ -1780,6 +1833,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4195799374852245883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6043096694229414016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6839724057707079116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,6 +1861,7 @@ GameObject:
   - component: {fileID: 1945086625106293250}
   - component: {fileID: 8049012696348650079}
   - component: {fileID: 3945617195609228247}
+  - component: {fileID: 3715432179257078734}
   m_Layer: 0
   m_Name: Prism
   m_TagString: Untagged
@@ -2136,6 +2202,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3715432179257078734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6839724057707079116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6967882741913127553
 GameObject:
   m_ObjectHideFlags: 0
@@ -2152,6 +2230,7 @@ GameObject:
   - component: {fileID: 3934588085457649347}
   - component: {fileID: 9158573483561003051}
   - component: {fileID: 4985583085507935973}
+  - component: {fileID: 7911195450510923568}
   m_Layer: 0
   m_Name: Prism (4)
   m_TagString: Untagged
@@ -2492,6 +2571,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7911195450510923568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6967882741913127553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6979832591593220922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2508,6 +2599,7 @@ GameObject:
   - component: {fileID: 6071236054391449764}
   - component: {fileID: 6210684622304628776}
   - component: {fileID: 8828481119134751217}
+  - component: {fileID: 3823121194494390206}
   m_Layer: 0
   m_Name: Prism (5)
   m_TagString: Untagged
@@ -2848,6 +2940,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3823121194494390206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979832591593220922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7372090799389034194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2864,6 +2968,7 @@ GameObject:
   - component: {fileID: 1967071387775032832}
   - component: {fileID: 3437531948269633959}
   - component: {fileID: 6960242627292374918}
+  - component: {fileID: 1934939940296800644}
   m_Layer: 0
   m_Name: Prism (2)
   m_TagString: Untagged
@@ -3204,6 +3309,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1934939940296800644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372090799389034194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7925304028791751719
 GameObject:
   m_ObjectHideFlags: 0
@@ -3220,6 +3337,7 @@ GameObject:
   - component: {fileID: 764941305459306077}
   - component: {fileID: 7078352266792177932}
   - component: {fileID: 3436786536044652168}
+  - component: {fileID: 5945542861138055297}
   m_Layer: 0
   m_Name: Prism (8)
   m_TagString: Untagged
@@ -3560,6 +3678,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5945542861138055297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7925304028791751719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8148630314071788999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,6 +3706,7 @@ GameObject:
   - component: {fileID: 210855380941518302}
   - component: {fileID: 9093209391187128970}
   - component: {fileID: 553246926331351883}
+  - component: {fileID: 8223697095951233065}
   m_Layer: 0
   m_Name: Prism (3)
   m_TagString: Untagged
@@ -3916,6 +4047,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8223697095951233065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148630314071788999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8691274810844661036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3932,6 +4075,7 @@ GameObject:
   - component: {fileID: 6352357412769782449}
   - component: {fileID: 2967117716250805471}
   - component: {fileID: 3679002848143414939}
+  - component: {fileID: 8556651591351593983}
   m_Layer: 0
   m_Name: Prism (10)
   m_TagString: Untagged
@@ -4272,6 +4416,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8556651591351593983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691274810844661036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e327ebea0fba9674292d415a249d84d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9004611522359910761
 GameObject:
   m_ObjectHideFlags: 0
