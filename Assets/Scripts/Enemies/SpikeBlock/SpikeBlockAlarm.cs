@@ -25,24 +25,21 @@ namespace AcidCube
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+
+            if (!other.GetComponent<PlayerController>()) return; 
+            foreach (var item in spikes)
             {
-                foreach (var item in spikes)
-                {
-                    StartCoroutine(SpikeMoving(item));
-                }
+                StartCoroutine(SpikeMoving(item));
             }
+
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (!other.GetComponent<PlayerController>()) return;
+            foreach (var item in spikes)
             {
-                foreach (var item in spikes)
-                {
-                    StartCoroutine(SpikeClosing(item));
-                }
-
+                StartCoroutine(SpikeClosing(item));
             }
         }
 

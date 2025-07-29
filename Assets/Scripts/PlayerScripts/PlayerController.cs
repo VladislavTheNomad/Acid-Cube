@@ -9,7 +9,8 @@ namespace AcidCube
         // External
         private Rigidbody rb;
         private Collider playerCollider;
-        public Renderer playerRenderer;
+        private Renderer playerRenderer;
+        private AudioSource playerAudioSource;
 
         // Own
         private Vector2 movementInput;
@@ -30,6 +31,7 @@ namespace AcidCube
             rb = GetComponent<Rigidbody>();
             playerCollider = GetComponent<Collider>();
             playerRenderer = GetComponent<Renderer>();
+            playerAudioSource = GetComponent<AudioSource>();
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -105,6 +107,23 @@ namespace AcidCube
             // NOTE: for debug
             // Debug.DrawRay(startPoint, direction * raycastGroundCheck, Color.cyan, Time.deltaTime);
 
+        }
+
+        // Change the renderer material
+
+        public void ChangeToGolden(Material newPlayerMaterial)
+        {
+            playerRenderer.material = newPlayerMaterial;
+        }
+
+        // Audio
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == 3 && groundDirection.x != 0) //ground AND wall
+            {
+                playerAudioSource.Play();
+            }
         }
     }
 }

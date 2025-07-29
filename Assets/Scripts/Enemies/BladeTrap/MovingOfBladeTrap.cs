@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace AcidCube
@@ -6,19 +7,23 @@ namespace AcidCube
     {
         [SerializeField] private BladeTrapAnimations fromAnimationScript;
         [SerializeField] private BladeTrapPathConstructor fromConstructorScript;
+        [SerializeField] private BladeTrapAudio fromAudioScript;
 
         [Header("On which direction will the enemy go?")]
         [SerializeField] private Direction directionPath;
 
         [SerializeField] private float bladeTrapSpeed;
+        [SerializeField] private float waitingTime;
 
         private Vector3 currentTarget;
+        public bool isWaiting { get; private set; }
         public Direction currentDirection { get; private set; }
 
         private void Start()
         {
             currentDirection = directionPath;
             fromAnimationScript.AnimationChanger(directionPath);
+            isWaiting = false;
 
             if (directionPath == Direction.Right) currentTarget = fromConstructorScript.farRightPoint;
             else currentTarget = fromConstructorScript.farLeftPoint;
@@ -32,8 +37,11 @@ namespace AcidCube
 
         private void Update()
         {
-            if(Vector3.Distance(transform.position, currentTarget) < 0.01f)
+            if(Vector3.Distance(transform.position, currentTarget) < 0.01f && !isWaiting)
             {
+                isWaiting = true;
+                fromAudioScript.TurnOffSound();
+                StartCoroutine(WaitSomeTime());
                 if(currentDirection == Direction.Right)
                 {
                     DirectionChanger(Direction.Left);
@@ -45,8 +53,19 @@ namespace AcidCube
                     currentTarget = fromConstructorScript.farRightPoint;
                 }
             }
-            Vector3 directionToTarget = (currentTarget - transform.position).normalized;
-            transform.Translate(directionToTarget * (bladeTrapSpeed * Time.deltaTime), Space.World);
+
+            if (!isWaiting)
+            {
+                Vector3 directionToTarget = (currentTarget - transform.position).normalized;
+                transform.Translate(directionToTarget * (bladeTrapSpeed * Time.deltaTime), Space.World);
+            }
+        }
+
+        private IEnumerator WaitSomeTime()
+        {
+            yield return new WaitForSeconds(waitingTime);
+            isWaiting = false;
+            fromAudioScript.TurnOnSound();
         }
     }
 }

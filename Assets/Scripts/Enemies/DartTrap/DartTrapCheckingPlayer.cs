@@ -6,11 +6,11 @@ namespace AcidCube
     public class DartTrap : MonoBehaviour
     {
         [SerializeField] public GameObject firingModule;
+        [SerializeField] private PlayAudioOnInteraction fromAudioScript;
         [SerializeField] LayerMask groundLayer;
         [SerializeField] private float fireDelay = 2f;
 
         private BulletPoolingDartTrap bulletPool;
-        private Coroutine nowFiringCoroutine;
         private bool fireIsReady = true;
 
         private void Awake()
@@ -19,39 +19,20 @@ namespace AcidCube
             bulletPool = FindAnyObjectByType<BulletPoolingDartTrap>();
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (!other.GetComponent<PlayerController>() || nowFiringCoroutine != null) return;
-
-            nowFiringCoroutine = StartCoroutine(Firing());
-        }
-
-        private void OnTriggerExit(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (!other.GetComponent<PlayerController>()) return;
 
-            if (nowFiringCoroutine != null)
+            if (fireIsReady)
             {
-                StopCoroutine(nowFiringCoroutine);
-                nowFiringCoroutine = null;
-            }
-        }
+                fireIsReady = false;
+                StartCoroutine(Recharge());
+                var newBullet = bulletPool.GetBulletFromPool();
 
-        private IEnumerator Firing()
-        {
-            while (true)
-            {
-                if (fireIsReady)
-                {
-                    fireIsReady = false;
-                    StartCoroutine(Recharge());
-                    var newBullet = bulletPool.GetBulletFromPool();
-
-                    newBullet.transform.SetLocalPositionAndRotation(
-                        firingModule.transform.position,
-                        firingModule.transform.rotation);
-                }
-                yield return new WaitForSeconds(fireDelay);
+                newBullet.transform.SetLocalPositionAndRotation(
+                    firingModule.transform.position,
+                    firingModule.transform.rotation);
+                fromAudioScript.PlayonAction();
             }
         }
 

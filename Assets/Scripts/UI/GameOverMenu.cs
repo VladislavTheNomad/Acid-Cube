@@ -35,7 +35,7 @@ namespace AcidCube
         {
             OnGameOverTriggered?.Invoke();
 
-            if (savingProgress.pointOfRestart.transform.position.y > lavaBlock.transform.position.y + 5.5f)
+            if (savingProgress.pointOfRestart.transform.position.y > lavaBlock.transform.position.y + 6.2f)
             {
                 player.transform.position = savingProgress.pointOfRestart.transform.position;
             }

@@ -8,6 +8,7 @@ namespace AcidCube
     {
         [SerializeField] private GameObject movingPressBlock;
         [SerializeField] private GameObject deathBlock;
+        [SerializeField] private PlayAudioOnInteraction fromAudioScript;
 
         [SerializeField] private float movingSpeedOpening;
         [SerializeField] private float movingSpeedClosing;
@@ -46,7 +47,7 @@ namespace AcidCube
 
                 if (currentYposition <= finalYposition)
                 {
-
+                    fromAudioScript.PlayonAction();
                     ModeChanger();
                 }
             }

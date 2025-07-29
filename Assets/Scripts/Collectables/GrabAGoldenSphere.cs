@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace AcidCube
 {
     public class GrabAGoldenSphere : MonoBehaviour
@@ -24,9 +23,7 @@ namespace AcidCube
             if (!other.GetComponent<PlayerController>()) return;
 
             playerController = GameObject.Find(other.name).GetComponent<PlayerController>();
-
-            playerController.playerRenderer.material = newPlayerMaterial;
-
+            playerController.ChangeToGolden(newPlayerMaterial);
             Destroy(gameObject);
         }
     }
