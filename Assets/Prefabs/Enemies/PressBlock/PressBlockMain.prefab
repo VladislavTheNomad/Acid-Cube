@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8544629433368021051}
   - component: {fileID: -4901589220302193248}
   - component: {fileID: 7451786322520417178}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PressBlockMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,9 +92,9 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 3
+  DopplerLevel: 0
+  MinDistance: 0.05
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -144,7 +144,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.25555557
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -159,7 +159,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -181,13 +181,13 @@ GameObject:
   - component: {fileID: 2099504441694252512}
   - component: {fileID: 5774445914838724437}
   - component: {fileID: 1298144771733611783}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Blackblock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7500584186067244656
 Transform:
   m_ObjectHideFlags: 0
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 8107713155997019727}
   - component: {fileID: 8280361661255229622}
   - component: {fileID: 4260909441724301558}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DeathBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

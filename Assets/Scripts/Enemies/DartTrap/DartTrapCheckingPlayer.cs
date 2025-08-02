@@ -7,7 +7,6 @@ namespace AcidCube
     {
         [SerializeField] public GameObject firingModule;
         [SerializeField] private PlayAudioOnInteraction fromAudioScript;
-        [SerializeField] LayerMask groundLayer;
         [SerializeField] private float fireDelay = 2f;
 
         private BulletPoolingDartTrap bulletPool;

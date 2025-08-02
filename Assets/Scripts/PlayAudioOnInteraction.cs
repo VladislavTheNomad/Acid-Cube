@@ -26,6 +26,11 @@ namespace AcidCube
 
         }
 
+        public void StopPlay()
+        {
+            audioSource.Stop();
+        }
+
         // USE AUDIO ON ENTER / EXIT
 
         private void OnCollisionEnter(Collision collision)
@@ -59,7 +64,7 @@ namespace AcidCube
         {
             if (!other.GetComponent<PlayerController>()) return;
 
-            if (audioClips.Length > 0)
+            if (audioClips.Length > 1)
             {
                 audioSource.clip = audioClips[1];
                 audioSource.Play();

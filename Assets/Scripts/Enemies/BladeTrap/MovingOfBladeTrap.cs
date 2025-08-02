@@ -7,7 +7,7 @@ namespace AcidCube
     {
         [SerializeField] private BladeTrapAnimations fromAnimationScript;
         [SerializeField] private BladeTrapPathConstructor fromConstructorScript;
-        [SerializeField] private BladeTrapAudio fromAudioScript;
+        [SerializeField] private PlayAudioOnInteraction fromAudioScript;
 
         [Header("On which direction will the enemy go?")]
         [SerializeField] private Direction directionPath;
@@ -39,8 +39,8 @@ namespace AcidCube
         {
             if(Vector3.Distance(transform.position, currentTarget) < 0.01f && !isWaiting)
             {
+                fromAudioScript.StopPlay();
                 isWaiting = true;
-                fromAudioScript.TurnOffSound();
                 StartCoroutine(WaitSomeTime());
                 if(currentDirection == Direction.Right)
                 {
@@ -65,7 +65,7 @@ namespace AcidCube
         {
             yield return new WaitForSeconds(waitingTime);
             isWaiting = false;
-            fromAudioScript.TurnOnSound();
+            fromAudioScript.PlayonAction();
         }
     }
 }

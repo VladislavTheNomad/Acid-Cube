@@ -30,7 +30,7 @@ namespace AcidCube
         private void ConstructPath()
         {
             pathPoints = new List<Vector3>();
-            pathPoints.Add(transform.position);
+            pathPoints.Add(RoundVector(transform.position));
 
             farRightPoint = transform.position;
             farLeftPoint = transform.position;
@@ -50,7 +50,7 @@ namespace AcidCube
         {
             while (true)
             {
-                if (!CheckPath(dir1 * 0.2f, whichIsDown))
+                if (!CheckPath(dir1 * 0.4f, whichIsDown))
                 {
                     continue;
                 }
@@ -59,7 +59,7 @@ namespace AcidCube
             }
             while (true)
             {
-                if (!CheckPath(dir2 * 0.2f, whichIsDown))
+                if (!CheckPath(dir2 * 0.4f, whichIsDown))
                 {
                     continue;
                 }
@@ -70,18 +70,30 @@ namespace AcidCube
 
         private bool CheckPath(Vector3 path, Vector3 toGround)
         {
-            isGroundHere = Physics.Raycast(pathPoints.Last() + path, toGround, 0.2f, groundLayer);
-            isGroundWallHere = Physics.Raycast(pathPoints.Last(), path, 0.2f, groundLayer);
+            Vector3 roundedPathIsGround = RoundVector(pathPoints.Last() + path);
+            Vector3 roundedPathIsWall = RoundVector(pathPoints.Last());
+
+            isGroundHere = Physics.Raycast(roundedPathIsGround, toGround, 0.4f, groundLayer);
+            isGroundWallHere = Physics.Raycast(roundedPathIsWall, path, 0.4f, groundLayer);
 
             Debug.DrawRay(pathPoints.Last() + path, toGround, Color.red, 100f);
             Debug.DrawRay(pathPoints.Last(), path, Color.red, 100f);
 
             if (isGroundHere && !isGroundWallHere)
             {
-                pathPoints.Add(pathPoints.Last() + path);
+                pathPoints.Add(roundedPathIsGround);
                 return false;
             }
             return true;
+        }
+
+        private Vector3 RoundVector(Vector3 newVector)
+        {
+            return new Vector3(
+                Mathf.Round(newVector.x * 10f) / 10f,
+                Mathf.Round(newVector.y * 10f) / 10f,
+                Mathf.Round(newVector.z * 10f) / 10f
+                );
         }
     }
 }

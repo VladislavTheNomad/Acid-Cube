@@ -15406,7 +15406,7 @@ GameObject:
   - component: {fileID: 5373289908352835682}
   - component: {fileID: 6717650779023932317}
   - component: {fileID: 8584510035493641935}
-  - component: {fileID: 385279797463893856}
+  - component: {fileID: -8254919150876070136}
   - component: {fileID: 4899547798075105395}
   m_Layer: 0
   m_Name: BladeTrap
@@ -15482,7 +15482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fromAnimationScript: {fileID: 5373289908352835682}
   fromConstructorScript: {fileID: 3171117672012449392}
-  fromAudioScript: {fileID: 385279797463893856}
+  fromAudioScript: {fileID: -8254919150876070136}
   directionPath: 0
   bladeTrapSpeed: 10
   waitingTime: 2
@@ -15501,7 +15501,7 @@ MonoBehaviour:
   movingScript: {fileID: 6717650779023932317}
   movingPartOfBladeTrap: {fileID: 6320437851612246591}
   speedOfRotating: 5
---- !u!114 &385279797463893856
+--- !u!114 &-8254919150876070136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15510,12 +15510,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5006469705292284541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06af7b70ffe5a3f42a3960d7b16413f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 967c9f1e229db7149b55f2190cf85a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClips:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 8300000, guid: acd7976e062c0aa4aab6b5bf3c2e448e, type: 3}
-  - {fileID: 8300000, guid: 0a6e31b4b8e1aca4084d7b310b2f0b96, type: 3}
 --- !u!82 &4899547798075105395
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15538,9 +15539,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 1.01
+  MaxDistance: 12
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -15588,7 +15589,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.1388889
+      value: 0.75
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -15603,7 +15604,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

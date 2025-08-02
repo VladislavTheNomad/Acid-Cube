@@ -19,7 +19,24 @@ namespace AcidCube
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.relativeVelocity.magnitude > 8 || (collision.relativeVelocity.magnitude > 2 && collision.gameObject.CompareTag("Rock")))
+            if (collision.relativeVelocity.magnitude > 8 || (collision.relativeVelocity.magnitude > 2 && collision.gameObject.CompareTag("Rock")) || collision.gameObject.CompareTag("Bullet"))
+            {
+                if (isCracked)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    isCracked = true;
+                    mat = GetComponent<Renderer>().material;
+                    mat.SetFloat("_BumpScale", 1f);
+                }
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Bullet"))
             {
                 if (isCracked)
                 {
